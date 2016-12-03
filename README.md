@@ -1,1 +1,1 @@
-permag.ir
+https://telegram.me/telebelack
