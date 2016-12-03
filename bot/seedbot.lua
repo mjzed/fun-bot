@@ -254,12 +254,16 @@ function create_config( )
 	"fal",
 	"muteall",
 	"security",
-	"lock_inline"
+	"lock_inline",
+	"lock_english",
+	"lock_fosh",
+	"lock_emoji",
+	"expire1"		
     },
     sudo_users = {299453239,182255045,0,tonumber(our_id)},--Sudo users
     moderation = {data = 'data/moderation.json'},
     about_text = [[
-	@permag_bots
+	
 ]],
     help_text_realm = [[
 ]],
