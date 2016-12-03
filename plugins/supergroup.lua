@@ -192,6 +192,95 @@ end
 
 
 
+local function lock_group_emoj(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_emoj_lock = data[tostring(target)]['settings']['lock_emoj']
+  if group_emoj_lock == 'yes' then
+    return '✅ فقل ایموجی فعال است'
+  else
+    data[tostring(target)]['settings']['flood'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return '✅ قفل ایموجی فعال شد'
+  end
+end
+
+local function unlock_group_emoj(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_emoj_lock = data[tostring(target)]['settings']['lock_emoj']
+  if group_emoj_lock == 'no' then
+    return '✅ ایموجی باز است
+  else
+    data[tostring(target)]['settings']['emoj'] = 'no'
+    save_data(_config.moderation.data, data)
+    return '✅ ایموجی باز شد
+  end
+end
+
+
+
+
+local function lock_group_english(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_engish_lock = data[tostring(target)]['settings']['lock_engish']
+  if group_engish_lock == 'yes' then
+    return '✅ قفل انگلسی فعال است'
+  else
+    data[tostring(target)]['settings']['lock_engish'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return '✅ انگلیسی قفل شد'
+  end
+end
+
+local function unlock_group_engish(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_engish_lock = data[tostring(target)]['settings']['lock_engish']
+  if group_engish_lock == 'no' then
+    return '✅قفل انگلسی باز است '
+  else
+    data[tostring(target)]['settings']['lock_engish'] = 'no'
+    save_data(_config.moderation.data, data)
+    return '✅ قفل انگلسی باز شد '
+  end
+end
+
+
+local function lock_group_fosh(msg, data, target)
+  if not is_momod(msg) then
+    return reply_msg(msg.id,"\n<b>شما مدیر نیستید! </b>", ok_cb, false)
+  end
+  local group_fosh_lock = data[tostring(target)]['settings']['fosh']
+  if group_fosh_lock == 'yes' then
+    return '🔹قفل فحش فعال است'
+  else
+    data[tostring(target)]['settings']['fosh'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return '🔹قفل فحش فعال شد'
+  end
+end
+
+local function unlock_group_fosh(msg, data, target)
+  if not is_momod(msg) then
+    return reply_msg(msg.id,"\n<b>شما مدیر نیستید! </b>", ok_cb, false)
+  end
+  local group_fosh_lock = data[tostring(target)]['settings']['fosh']
+  if group_fosh_lock == 'no' then
+    return '🔹قفل فحش غیر فعال است'
+  else
+    data[tostring(target)]['settings']['fosh'] = 'no'
+    save_data(_config.moderation.data, data)
+    return '🔹قفل فحش غیر فعال شد'
+  end
+end
+
+
 local function lock_group_username(msg, data, target)
   if not is_momod(msg) then
     return reply_msg(msg.id,"\n<b>شما مدیر نیستید! </b>", ok_cb, false)
@@ -2179,6 +2268,7 @@ return {
 	"^[#!/]([Ss]etusername) (.*)$",
 	"^[#!/]([Dd]el)$",
 	"^[#!/]([Ll]ock) (.*)$",
+        "^[#!/]([Aa]nti) (.*)$",
 	"^[#!/]([Uu]nlock) (.*)$",
 	"^[#!/]([Mm]ute) ([^%s]+)$",
 	"^[#!/]([Uu]nmute) ([^%s]+)$",
@@ -2201,10 +2291,10 @@ return {
 	"%[(video)%]",
 	"%[(audio)%]",
 	"%[(contact)%]",
-	"^!!tgservice (.+)$",
+	"^!!tgservice (.+)$",		
   },
   run = run,
   pre_process = pre_process
 }
 --End supergrpup.lua
---By @permag_bots
+--By https://telegram.me/telebelack
